@@ -1,5 +1,6 @@
 //LINK to the Problem:
 //https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1415
+//Problem type: Binary Search
 
 #include<iostream>
 #include<vector>
