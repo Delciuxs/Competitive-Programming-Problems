@@ -4,7 +4,7 @@
 
 /*
 For the solution of this problem I use property:
-(x mod n) * (y mod n) = (x*y mod n)
+(x*y mod n) = ((x mod n) * (y mod n)) mod n 
 */
 
 #include<iostream>
