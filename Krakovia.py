@@ -1,5 +1,5 @@
 #LINK to the Problem:
-#https:https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1866
+#https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1866
 #Problem type: Big Interger
 
 #We need funtion Fractions for a good aproximation for a division
