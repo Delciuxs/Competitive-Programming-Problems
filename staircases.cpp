@@ -21,7 +21,6 @@ long long int num_staircase(long long int n, vector<vector<long long int> > &mem
 	else if(memory[n][k] == -1)
 	{
 		sum = 0;
-	
 		s = n - k;
 
 		if(k + 1 > s)
@@ -30,19 +29,14 @@ long long int num_staircase(long long int n, vector<vector<long long int> > &mem
 		else
 		{
 			for(long long int b = k; b <= s/2; b++)
-			{
 				sum +=  num_staircase(s, memory ,b + 1);
-				
-			}
 			sum++;
 			memory[n][k] = sum;
 			return sum;
-		
 		}
 	}
 
 	return memory[n][k];
-
 }
 
 int main()
@@ -53,7 +47,6 @@ int main()
 	cin >> num_blocks;
 
 	vector<long long int> columns(300,-1);
-
 	vector<vector<long long int> > grid(505 ,columns);
 
 	for(long long int f = 1; f <= num_blocks / 2; f++)
