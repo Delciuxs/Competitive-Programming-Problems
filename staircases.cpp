@@ -32,7 +32,6 @@ long long int num_staircase(long long int n, vector<vector<long long int> > &mem
 				sum +=  num_staircase(s, memory ,b + 1);
 			sum++;
 			memory[n][k] = sum;
-			return sum;
 		}
 	}
 
