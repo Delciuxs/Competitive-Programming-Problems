@@ -3,7 +3,9 @@ import java.math.BigInteger;
 
 public class k_based_numers_v2
 {
-	static int n, k;
+	static int n;
+
+	static BigInteger k = new BigInteger("0");
 
 	static BigInteger solve(int past_number, int actual_number,int level, BigInteger memory[][])
 	{
@@ -16,14 +18,7 @@ public class k_based_numers_v2
 			return BigInteger.ONE;
 
 		else if(memory[level][actual_number] == BigInteger.ZERO)
-		{
-			for(int s = 0; s < k; s++)
-			{
-				aux = aux.add(solve(actual_number, s, level + 1, memory));
-
-				memory[level][actual_number] = aux;
-			}
-		}
+			memory[level][actual_number] = solve(actual_number, 0, level + 1, memory).add(solve(actual_number, 1, level + 1, memory).multiply(k.subtract(BigInteger.ONE)));
 
 		return memory[level][actual_number];
 	}
@@ -36,19 +31,16 @@ public class k_based_numers_v2
 
 		n = reader.nextInt();
 
-		k = reader.nextInt();
+		k = reader.nextBigInteger();
 
-		BigInteger memory[][] = new BigInteger[n + 3][k + 3];
+		BigInteger memory[][] = new BigInteger[n + 1][3];
 
 		for(int i = 0; i < n + 1; i++)
-			for(int j = 0; j < k; j++)
+			for(int j = 0; j < 3; j++)
 				memory[i][j] = BigInteger.ZERO;
 			
 
-		for(int i = 1; i < k; i++)
-		{
-			ans =  ans.add(solve(0, i, 1, memory));
-		}
+		ans = solve(0,1,1, memory).multiply(k.subtract(BigInteger.ONE));
 
 		System.out.println(ans);
 	}
