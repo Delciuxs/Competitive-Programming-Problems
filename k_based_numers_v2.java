@@ -1,3 +1,7 @@
+//LINK to the Problem:
+//http://acm.timus.ru/problem.aspx?space=1&num=1012
+//Problem type: DP
+
 import java.util.*;
 import java.math.BigInteger;
 
