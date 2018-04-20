@@ -1,3 +1,7 @@
+//LINK to the Problem:
+//https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3638
+//Problem type: Union Find Disjoint Sets
+
 #include<iostream>
 #include<vector>
 
