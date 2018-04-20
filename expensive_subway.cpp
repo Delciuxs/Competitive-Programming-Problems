@@ -10,7 +10,7 @@ using namespace std;
 
 struct station
 {
-	int commond_station;
+	int common_station;
 	int rank;
 };
  
@@ -20,16 +20,16 @@ typedef station station;
 vector<station> stations;
 int num_disjoint_sets;
 
-int find_commond_station(int s)
+int find_common_station(int s)
 {
-	if(stations[s].commond_station != s)
-		stations[s].commond_station = find_commond_station(stations[s].commond_station);
-	return stations[s].commond_station;
+	if(stations[s].common_station != s)
+		stations[s].common_station = find_common_station(stations[s].common_station);
+	return stations[s].common_station;
 }
 
 bool same_set(int s1, int s2)
 {
-	if(find_commond_station(s1) == find_commond_station(s2))
+	if(find_common_station(s1) == find_common_station(s2))
 		return true;
 	return false;
 }
@@ -37,21 +37,21 @@ bool same_set(int s1, int s2)
 
 void joins_sets(int st1, int st2)
 {
-	int commond_st1, commond_st2;
+	int common_st1, common_st2;
 
-	commond_st1 = find_commond_station(st1);
-	commond_st2 = find_commond_station(st2);
+	common_st1 = find_common_station(st1);
+	common_st2 = find_common_station(st2);
 
 	num_disjoint_sets--;
 
-	if(stations[commond_st1].rank > stations[commond_st2].rank)
-		stations[commond_st2].commond_station = commond_st1;
+	if(stations[common_st1].rank > stations[common_st2].rank)
+		stations[common_st2].common_station = common_st1;
 
 	else
 	{
-		stations[commond_st1].commond_station = commond_st2;			
-		if(stations[commond_st1].rank == stations[commond_st2].rank)
-			stations[commond_st2].rank++;
+		stations[common_st1].common_station = common_st2;			
+		if(stations[common_st1].rank == stations[common_st2].rank)
+			stations[common_st2].rank++;
 	}
 }
 
@@ -85,7 +85,7 @@ int main()
 
 		for(int i = 0; i < stations.size(); i++)
 		{
-			stations[i].commond_station = i;
+			stations[i].common_station = i;
 			stations[i].rank = 0;
 		}
 
