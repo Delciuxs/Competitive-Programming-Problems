@@ -18,7 +18,7 @@ double distance_between_buildings(int x1, int y1, int x2, int y2)
 
 struct building
 {
-	int commond_building;
+	int common_building;
 	int rank;
 };
 
@@ -27,44 +27,44 @@ typedef building building;
 vector<building> buildings;
 int num_disjoint_set;
 
-int find_commonf_building(int b)
+int find_common_building(int b)
 {
-	if(buildings[b].commond_building != b)
-		buildings[b].commond_building = find_commonf_building(buildings[b].commond_building);
-	return buildings[b].commond_building;
+	if(buildings[b].common_building != b)
+		buildings[b].common_building = find_common_building(buildings[b].common_building);
+	return buildings[b].common_building;
 }
 
 bool same_set(int b1, int b2)
 {
-	if(find_commonf_building(b1) == find_commonf_building(b2))
+	if(find_common_building(b1) == find_common_building(b2))
 		return true;
 	return false;
 }
 
 void join_set(int bu1, int bu2)
 {
-	int commond_buildingA, commond_buildingB;
+	int common_buildingA, common_buildingB;
 
-	commond_buildingA = find_commonf_building(bu1);
-	commond_buildingB = find_commonf_building(bu2);
+	common_buildingA = find_common_building(bu1);
+	common_buildingB = find_common_building(bu2);
 
 	
-	if(commond_buildingA == commond_buildingB)
+	if(common_buildingA == common_buildingB)
 		return;
 
-	if(buildings[commond_buildingA].rank > buildings[commond_buildingB].rank)
+	if(buildings[common_buildingA].rank > buildings[common_buildingB].rank)
 	{
 		num_disjoint_set--;
-		buildings[commond_buildingB].commond_building = commond_buildingA;
+		buildings[common_buildingB].common_building = common_buildingA;
 	}
 
 	else
 	{
-		buildings[commond_buildingA].commond_building = commond_buildingB;
+		buildings[common_buildingA].common_building = common_buildingB;
 		num_disjoint_set--;
-		if(buildings[commond_buildingA].rank == buildings[commond_buildingB].rank)		
+		if(buildings[common_buildingA].rank == buildings[common_buildingB].rank)		
 		{
-			buildings[commond_buildingB].rank++;
+			buildings[common_buildingB].rank++;
 		}
 	}
 }
@@ -92,7 +92,7 @@ int main()
 
 		for(int i = 0; i < buildings.size(); i++)
 		{
-			buildings[i].commond_building = i;
+			buildings[i].common_building = i;
 			buildings[i].rank = 0;
 		}
 
