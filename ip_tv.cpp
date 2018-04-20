@@ -10,7 +10,7 @@ using namespace std;
 
 struct city
 {
-	int commond_city;
+	int common_city;
 	int rank;
 };
 
@@ -21,10 +21,10 @@ int num_disjoint_sets;
 
 int find_common_city(int c1)
 {
-	if(cities[c1].commond_city != c1)
-		cities[c1].commond_city = find_common_city(cities[c1].commond_city);
+	if(cities[c1].common_city != c1)
+		cities[c1].common_city = find_common_city(cities[c1].common_city);
 
-	return cities[c1].commond_city;
+	return cities[c1].common_city;
 }
 
 bool same_set(int ci1, int ci2)
@@ -37,24 +37,24 @@ bool same_set(int ci1, int ci2)
 
 void join_cities(int city1, int city2)
 {
-	int commond_cityA, commond_cityB;
+	int common_cityA, common_cityB;
 
-	commond_cityA = find_common_city(city1);
-	commond_cityB = find_common_city(city2);
+	common_cityA = find_common_city(city1);
+	common_cityB = find_common_city(city2);
 
-	if(cities[commond_cityA].rank > cities[commond_cityB].rank)
+	if(cities[common_cityA].rank > cities[common_cityB].rank)
 	{
-		cities[commond_cityB].commond_city = commond_cityA;
+		cities[common_cityB].common_city = common_cityA;
 		num_disjoint_sets = num_disjoint_sets - 1;
 	}
 
 	else
 	{
-		cities[commond_cityA].commond_city = commond_cityB;
+		cities[common_cityA].common_city = common_cityB;
 		num_disjoint_sets = num_disjoint_sets - 1;
 
-		if(cities[commond_cityA].rank == cities[commond_cityB].rank)
-			cities[commond_cityB].rank = cities[commond_cityB].rank + 1;
+		if(cities[common_cityA].rank == cities[common_cityB].rank)
+			cities[common_cityB].rank = cities[common_cityB].rank + 1;
 	}
 }
 
@@ -86,7 +86,7 @@ int main()
 
 		for(int j = 0; j < cities.size(); j++)
 		{
-			cities[j].commond_city = j;
+			cities[j].common_city = j;
 			cities[j].rank = 0;
 		}
 
