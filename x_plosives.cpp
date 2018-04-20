@@ -11,7 +11,7 @@ using namespace std;
 
 struct component
 {
-	int commond_component;
+	int common_component;
 	int rank;
 };
 
@@ -19,16 +19,16 @@ typedef component component;
 
 vector<component> components;
 
-int find_commond_component(int c)
+int find_common_component(int c)
 {
-	if(components[c].commond_component != c)
-		components[c].commond_component = find_commond_component(components[c].commond_component);
-	return components[c].commond_component;
+	if(components[c].common_component != c)
+		components[c].common_component = find_common_component(components[c].common_component);
+	return components[c].common_component;
 }
 
 bool same_set(int c1, int c2)
 {
-	if(find_commond_component(c1) == find_commond_component(c2))
+	if(find_common_component(c1) == find_common_component(c2))
 		return true;
 	return false;
 }
@@ -37,15 +37,15 @@ void join_sets(int co1, int co2)
 {
 	int component1, component2;
 
-	component1 = find_commond_component(co1);
-	component2 = find_commond_component(co2);
+	component1 = find_common_component(co1);
+	component2 = find_common_component(co2);
 
 	if(components[component1].rank > components[component2].rank)
-		components[component2].commond_component = component1;
+		components[component2].common_component = component1;
 
 	else
 	{
-		components[component1].commond_component = component2;
+		components[component1].common_component = component2;
 		if(components[component1].rank == components[component2].rank)
 			components[component2].rank++;
 	}
@@ -67,7 +67,7 @@ int main()
 
 			for(int i = 0; i < components.size(); i++)
 			{
-				components[i].commond_component = i;
+				components[i].common_component = i;
 				components[i].rank = 0;
 			}
 
