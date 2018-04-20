@@ -8,7 +8,7 @@ using namespace std;
 
 struct person
 {
-	int commond_friend;
+	int common_friend;
 	int num_people_reached;
 	int rank;
 };
@@ -18,37 +18,37 @@ typedef person person;
 vector<person> people;
 
 
-int find_commond_friend(int f)
+int find_common_friend(int f)
 {
-	if(people[f].commond_friend != f)
-		people[f].commond_friend = find_commond_friend(people[f].commond_friend);
+	if(people[f].common_friend != f)
+		people[f].common_friend = find_common_friend(people[f].common_friend);
 
-	return people[f].commond_friend;
+	return people[f].common_friend;
 }
 
 void meet_this_people(int a, int b)
 {	
-	int commond_friend_A, commond_friend_B;
+	int common_friend_A, common_friend_B;
 
-	commond_friend_A = find_commond_friend(a);
-	commond_friend_B = find_commond_friend(b);
+	common_friend_A = find_common_friend(a);
+	common_friend_B = find_common_friend(b);
 
-	if(commond_friend_A == commond_friend_B)
+	if(common_friend_A == common_friend_B)
 		return;
 
-	if(people[commond_friend_A].rank > people[commond_friend_B].rank)
+	if(people[common_friend_A].rank > people[common_friend_B].rank)
 	{
-		people[commond_friend_B].commond_friend = commond_friend_A;
-		people[commond_friend_A].num_people_reached += people[commond_friend_B].num_people_reached;
+		people[common_friend_B].common_friend = common_friend_A;
+		people[common_friend_A].num_people_reached += people[common_friend_B].num_people_reached;
 	}
 
 	else
 	{
-		people[commond_friend_A].commond_friend = commond_friend_B;
-		people[commond_friend_B].num_people_reached += people[commond_friend_A].num_people_reached;
+		people[common_friend_A].common_friend = common_friend_B;
+		people[common_friend_B].num_people_reached += people[common_friend_A].num_people_reached;
 
-		if(people[commond_friend_A].rank == people[commond_friend_B].rank)
-			people[commond_friend_B].rank = people[commond_friend_B].rank + 1;
+		if(people[common_friend_A].rank == people[common_friend_B].rank)
+			people[common_friend_B].rank = people[common_friend_B].rank + 1;
 	}
 }
 
@@ -66,7 +66,7 @@ int main()
 
 	for(int j = 0; j < people.size(); j++)
 	{
-		people[j].commond_friend = j;
+		people[j].common_friend = j;
 		people[j].num_people_reached = 1;
 		people[j].rank = 0;
 	}
@@ -85,7 +85,7 @@ int main()
 		{
 			cin >> reach_from_this;
 
-			super_person = find_commond_friend(reach_from_this);
+			super_person = find_common_friend(reach_from_this);
 
 			cout << people[super_person].num_people_reached << "\n";
 		}
