@@ -9,7 +9,7 @@ using namespace std;
 
 struct neighbor
 {
-	int commond_neighbor;
+	int common_neighbor;
 	int rank;
 };
 
@@ -20,37 +20,37 @@ int num_disjoint_sets;
 int number_neighbors;
 vector<int> connectios_used;
 
-int find_commond_neighbor(int n)
+int find_common_neighbor(int n)
 {
-	if(neighbors[n].commond_neighbor != n)
-		neighbors[n].commond_neighbor = find_commond_neighbor(neighbors[n].commond_neighbor);
-	return neighbors[n].commond_neighbor;
+	if(neighbors[n].common_neighbor != n)
+		neighbors[n].common_neighbor = find_common_neighbor(neighbors[n].common_neighbor);
+	return neighbors[n].common_neighbor;
 }
 
 bool same_set(int n1, int n2)
 {
-	if(find_commond_neighbor(n1) == find_commond_neighbor(n2))
+	if(find_common_neighbor(n1) == find_common_neighbor(n2))
 		return true;
 	return false;
 }
 
 void join_sets(int n1, int n2)
 {
-	int commond_neighborA, commond_neighborB;
+	int common_neighborA, common_neighborB;
 
-	commond_neighborA = find_commond_neighbor(n1);
-	commond_neighborB = find_commond_neighbor(n2);
+	common_neighborA = find_common_neighbor(n1);
+	common_neighborB = find_common_neighbor(n2);
 
 	num_disjoint_sets--;
 
-	if(neighbors[commond_neighborA].rank > neighbors[commond_neighborB].rank)
-		neighbors[commond_neighborB].commond_neighbor = commond_neighborA;
+	if(neighbors[common_neighborA].rank > neighbors[common_neighborB].rank)
+		neighbors[common_neighborB].common_neighbor = common_neighborA;
 
 	else
 	{
-		neighbors[commond_neighborA].commond_neighbor = commond_neighborB;		
-		if(neighbors[commond_neighborA].rank == neighbors[commond_neighborB].rank)
-			neighbors[commond_neighborB].rank++;
+		neighbors[common_neighborA].common_neighbor = common_neighborB;		
+		if(neighbors[common_neighborA].rank == neighbors[common_neighborB].rank)
+			neighbors[common_neighborB].rank++;
 	}
 }
 
@@ -63,7 +63,7 @@ pair<int, int> second_way(int dont_use_this_connection, vector<pair<int, pair<in
 	
 	for(int j = 0; j < neighbors.size(); j++)
 	{
-		neighbors[j].commond_neighbor = j;
+		neighbors[j].common_neighbor = j;
 		neighbors[j].rank = 0;
 	}
 
@@ -111,7 +111,7 @@ int main()
 
 		for(int j = 0; j < neighbors.size(); j++)
 		{
-			neighbors[j].commond_neighbor = j;
+			neighbors[j].common_neighbor = j;
 			neighbors[j].rank = 0;
 		}
 
