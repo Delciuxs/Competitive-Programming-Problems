@@ -7,77 +7,45 @@
 #include<algorithm>
 using namespace std;
 
-
-int Binary_Search(vector<int> &set, int element, int left_boundary, int right_boundary)
-{
-	int middle;
-	int position = -1;
-	int cont = 0;
-	while(cont < 40)
-	{
-		middle = (left_boundary + right_boundary) / 2;
-		if(element == set[middle])
-		{
-			position = middle;
-			right_boundary = middle - 1;
+int binarySearch(vector<int> &marbles, int find){
+	int leftBoundary = 0, rightBoundary = marbles.size() - 1, middle;
+	int index = -1;
+	while(leftBoundary <= rightBoundary){
+		middle = (leftBoundary + rightBoundary) / 2;
+		if(find == marbles[middle]){
+			index = middle;
+			rightBoundary = middle - 1;
+		}else if(marbles[middle] < find){
+			leftBoundary = middle + 1;
+		}else{
+			rightBoundary = middle - 1;
 		}
-	
-		else
-		{
-			if(element < set[middle])
-				right_boundary = middle - 1;
-			else if(element > set[middle])
-				left_boundary = middle + 1;
-		}
-		cont++;
 	}
-
-	return position;
+	return index;
 }
 
 int main()
 {
-	int N, Q, num_case = 1; 	
+	int n ,q, cont = 1; cin >> n >> q;
 
-	cin >> N >> Q;
-
-	while(N != 0 && Q != 0)
-	{
-		vector<int> numbers;
-		vector<int> elements_to_search;
-		int search_this, number, position;
-
-		for(int i = 0; i < N; i++)
-		{
-			cin >> number;
-			numbers.push_back(number);
-		}
-
-		sort(numbers.begin(), numbers.end());
-
-		for(int i = 0; i < Q; i++)
-		{
-			cin >> search_this;
-			elements_to_search.push_back(search_this);
-		}
-		
-
-		cout << "CASE# " << num_case << ":" << endl;
-
-		for(int i = 0; i < elements_to_search.size(); i++)
-		{
-			position = Binary_Search(numbers, elements_to_search[i], 0, numbers.size()-1);
-			
-			if(position == -1)				
-				cout << elements_to_search[i] << " not found" << endl;
+	while((n + q) != 0){
+		vector<int> marbles(n);
+		int query;
+		for(int i = 0; i < n; i++)
+			cin >> marbles[i];
+		sort(marbles.begin(), marbles.end());
+		cout << "CASE# " << cont << ":\n";
+		for(int i = 0; i < q; i++){
+			cin >> query;
+			int lowerBound = binarySearch(marbles, query);
+			if(lowerBound == -1)
+				cout << query << " not found\n"; 
 			else
-				cout << elements_to_search[i] << " found at " << position + 1<< endl;
+				cout << query << " found at " << lowerBound + 1 << "\n";
 		}
-		
-		num_case++;
-		cin >> N >> Q;
-
+		cont++;
+		cin >> n >> q;
 	}
 
-	return  0;
+	return 0;
 }
