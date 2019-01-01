@@ -1,51 +1,45 @@
 //LINK to the Problem:
-//https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1282
+//https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1282
 //Problem type: Binary Search
 
 #include<iostream>
-#include<math.h>
 #include<iomanip>
+#include<cmath>
 using namespace std;
+#define eps 1e-4
 
-int main()
-{
-	int p, q, r, s, t, u;
-	double evaluation, x, left_boundary, right_boundary, res;
-
-	while(cin >> p >> q >> r >> s >> t >> u)
-	{
-
-		left_boundary = 0;
-		right_boundary = 1;
-
-		int cont = 0;
-
-		while(cont < 50)
-		{
-			//This means that the funtion never make a change from f(x) to -f(x) if it was, the funtion will pass trough the y axis
-			if(p * exp(-1) + q * sin(1) + r * cos(1) + s * tan(1) + t + u > 1e-9 || p + r + u < 0)
-			{
-				x = -1;
-				break;
-			}
-			x = (left_boundary + right_boundary) / 2.0;
-			evaluation = p*(exp(-x)) + q*(sin(x)) + r*(cos(x)) + s*(tan(x)) + t*(x*x) + u;
-	
-			
-			if(evaluation > 0)
-				left_boundary = x;
-			else
-				right_boundary = x;
-		
-			cont++;
-		}
-
-		if(x == -1)
-			cout << "No solution" << endl;
-		else
-			cout << setprecision(4) << fixed << x << endl;
-	}
-
-	return 0;
+double evaluation(int p, int q, int r, int s, int t, int u, double x){
+	return p*(exp(-x)) + q*(sin(x)) + r*(cos(x)) + s*(tan(x)) + t*(x*x) + u;
 }
 
+double BinarySearch(int p, int q, int r, int s, int t, int u){
+	double left = 0, right = 1, x, eval;
+	int cont = 0;
+
+	while(cont < 30){
+		x = (left + right) / 2.0;
+		eval = evaluation(p, q, r, s, t, u, x);
+		if(eval > 0)
+			left = x;
+		else
+			right = x;
+		cont++;
+	}
+	if(abs(eval) < eps)
+		return x;
+	return -1.0;
+}
+
+int main(){
+
+	int p, q, r, s, t, u;
+
+	while(cin >> p >> q >> r >> s >> t >> u){
+		double answer = BinarySearch(p, q, r, s, t, u);
+		if(answer == -1.0)
+			cout << "No solution" << "\n";
+		else
+			cout << fixed << setprecision(4) << answer << "\n";
+	}
+	return 0;
+}
