@@ -1,6 +1,6 @@
 #LINK to the Problem:
 #https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1464
-#Problem type: Big Interger
+#Problem type: Big Integer
 
 #We need funtion pow for a good aproximation
 
