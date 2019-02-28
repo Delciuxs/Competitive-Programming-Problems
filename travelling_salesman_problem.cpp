@@ -1,6 +1,6 @@
 //LINK to the Problem:
 //https://practice.geeksforgeeks.org/problems/travelling-salesman-problem/0
-//Problem type: SSSP Dijkstra
+//Problem type: Travelling SalesMan Problem
 
 #include<iostream>
 #include<vector>
